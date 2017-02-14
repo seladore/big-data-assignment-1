@@ -21,7 +21,7 @@ import time
 #_______________________________________________
 ## | 2 | Input File and Create Graph Object
 start = time.time()
-with open("social_network_data.txt", "rb") as connect:
+with open("part_3_testing_data.txt", "rb") as connect:
     connections = csv.reader(connect, delimiter="\n")
     edge_list = [node[0].replace("\t",",") for node in connections]
     G = nx.parse_adjlist(edge_list, delimiter=",", nodetype=int)
