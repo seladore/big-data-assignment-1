@@ -1,0 +1,1 @@
+hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file /home/cloudera/workspace/word_count_python/mapper.py -mapper /home/cloudera/workspace/word_count_python/mapper.py -file /home/cloudera/workspace/word_count_python/reducer.py -reducer /home/cloudera/workspace/word_count_python/reducer.py -input pg100.txt -output /results
