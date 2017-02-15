@@ -1,5 +1,5 @@
 // package: identifies what the Java program belongs to
-package edu.wm.wordcount;
+package edu.wm.lettercount;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -21,10 +21,10 @@ import org.apache.hadoop.util.ToolRunner;
 
 
 // public anyone can access
-public class WordCount extends Configured implements Tool {
+public class LetterCount extends Configured implements Tool {
    public static void main(String[] args) throws Exception {
       System.out.println(Arrays.toString(args));
-      int res = ToolRunner.run(new Configuration(), new WordCount(), args);
+      int res = ToolRunner.run(new Configuration(), new LetterCount(), args);
 
       System.exit(res);
    }
@@ -32,8 +32,8 @@ public class WordCount extends Configured implements Tool {
    @Override
    public int run(String[] args) throws Exception {
       System.out.println(Arrays.toString(args));
-      Job job = new Job(getConf(), "WordCount");
-      job.setJarByClass(WordCount.class);
+      Job job = new Job(getConf(), "LetterCount");
+      job.setJarByClass(LetterCount.class);
       job.setOutputKeyClass(Text.class);
       job.setOutputValueClass(IntWritable.class);
 
@@ -53,21 +53,27 @@ public class WordCount extends Configured implements Tool {
 
 //  trying to look at the first letter
    public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
-      private final static IntWritable ONE = new IntWritable(1);
-    //   private Text word = new Text();
+//      private final static IntWritable ONE = new IntWritable(1);
     //  changed the var to letter and takes 1 byte characters
-      private Char letter = new Char();
+//      private Text result = new Text();
 
-      @Override
+//      @Override
       public void map(LongWritable key, Text value, Context context)
               throws IOException, InterruptedException {
 // maybe use something with this? .charAt(0)
          for (String token: value.toString().split("\\s+")) {
             // word.set(token);
             // I think this assigns the var letter to token
-            letter.set(token.charAt(0));
+        	String word = token.toString();
+        	String letter = word.substring(0,1);
+//            char[] letters = word.toCharArray();
+//            char letter = word.charAt(0);
+//            String letter = Character.toString(first_let);
+//            result.set(letter);
             // context.write(word, ONE);
-            context.write(letter, ONE);
+        	System.out.println(token);
+        	System.out.println(letter);
+            context.write(new Text(letter), new IntWritable(1));
          }
       }
    }
@@ -77,10 +83,13 @@ public class WordCount extends Configured implements Tool {
       public void reduce(Text key, Iterable<IntWritable> values, Context context)
               throws IOException, InterruptedException {
          int sum = 0;
+         IntWritable result = new IntWritable();
          for (IntWritable val : values) {
             sum += val.get();
+            result.set(sum);
          }
-         context.write(key, new IntWritable(sum));
+         System.out.println(result);
+         context.write(key, result);
       }
    }
 }
