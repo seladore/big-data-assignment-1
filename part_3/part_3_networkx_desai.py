@@ -2,10 +2,10 @@
 import sys
 import zipimport
 #import csv
-#import networkx as nx
+import networkx as nx
 
-importer = zipimport.zipimporter("networkx.mod")
-nx = importer.load_module("networkx")
+# importer = zipimport.zipimporter("networkx.mod")
+# nx = importer.load_module("networkx")
 
 # for line in sys.stdin:
 #     print line
@@ -32,16 +32,19 @@ nx = importer.load_module("networkx")
 #import sys
 
 # input comes from STDIN (standard input)
-for line in sys.stdin:
-    # remove leading and trailing whitespace
-    line = line.strip()
-    # split the line into words
-    words = line.split()
-    # increase counters
-    for word in words:
-        # write the results to STDOUT (standard output);
-        # what we output here will be the input for the
-        # Reduce step, i.e. the input for reducer.py
-        #
-        # tab-delimited; the trivial word count is 1
-        print '%s\t%s' % (word, 1)
+# for line in sys.stdin:
+#     # remove leading and trailing whitespace
+#     line = line.strip()
+#     # split the line into words
+#     words = line.split()
+#     # increase counters
+#     for word in words:
+#         # write the results to STDOUT (standard output);
+#         # what we output here will be the input for the
+#         # Reduce step, i.e. the input for reducer.py
+#         #
+#         # tab-delimited; the trivial word count is 1
+#         print '%s\t%s' % (word, 1)
+#
+# if __name__ == "__main__":
+#     main()

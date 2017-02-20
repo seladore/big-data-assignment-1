@@ -1,6 +1,6 @@
 import csv
 
-with open("part_3_testing_data.txt", "rb") as connect:
+with open("part_3_social_network_data.txt", "rb") as connect:
     # connections = csv.reader(connect, delimiter="\n")
     original = connect.readlines()
     nodes = []
@@ -12,7 +12,7 @@ with open("part_3_testing_data.txt", "rb") as connect:
     # print nodes
 # print nodes[:20]
 
-with open("counts.txt", "rb") as results:
+with open("final_mr_job.txt", "rb") as results:
 	lines = results.readlines()
 	output = {}
 	for result in lines:
@@ -30,7 +30,7 @@ with open("counts.txt", "rb") as results:
 # 	else:
 # 		print node
 
-with open("output_testing_data.txt", "w") as write_output:
+with open("final_mrjob_output.txt", "w") as write_output:
 	for node in nodes:
 		if node in output:
 			# print node, output[node]
